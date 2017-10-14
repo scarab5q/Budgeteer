@@ -14,8 +14,8 @@ const puppeteer = require('puppeteer');
     // Navigate to Our Code World
     await page.goto('https://nomadlist.com/');
 
-    var cities =await page.evaluate(function(){
-        return Array.from(document.getElementsByItem("grid show view"));
+    var cities = await page.evaluate(() => {
+        return Array.from(document.getElementsByClass("grid show view"));
     });
 
     console.log(cities);
