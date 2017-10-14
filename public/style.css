@@ -136,9 +136,6 @@ p {
 }
 
 img {
-	padding-top: 10px;
-}
-
-#edit-img:active img {
-    padding-left: 80%;
+	height: 60px;
+	padding-top: 15px;
 }
