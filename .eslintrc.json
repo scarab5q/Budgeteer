@@ -1,36 +1,14 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module"
-    },
+    "extends": "standard",
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ]
-    },
-    "require-jsdoc": ["error", {
-       "require": {
-           "FunctionDeclaration": false,
-           "MethodDefinition": false,
-           "ClassDeclaration": false,
-           "ArrowFunctionExpression": false
-       }
-   }]
+      "require-jsdoc": ["off", {
+          "require": {
+              "FunctionDeclaration": false,
+              "MethodDefinition": false,
+              "ClassDeclaration": false
+            }
+          }],
+      "comma-dangle": [0, "always-multiline"],
+      "no-trailing-spaces": 0
+    }
 }
