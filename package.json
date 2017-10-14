@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/scarab5q/Budgeteer#readme",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "express": "^4.16.2"
   }
 }
