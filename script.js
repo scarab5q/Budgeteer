@@ -14,9 +14,9 @@ const puppeteer = require('puppeteer');
   // Navigate to Our Code World
   await page.goto('https://nomadlist.com/')
 
-  var cityPrices = await page.evaluate(function () {
-    return document
-  })
+    var cities = await page.evaluate(() => {
+        return Array.from(document.getElementsByClass("grid show view"));
+    });
 
   console.log(cityPrices)
   // Close Browser

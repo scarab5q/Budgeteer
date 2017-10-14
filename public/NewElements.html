@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.slider {
+    -webkit-appearance: none;
+    width: 80%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+</style>
+</head>
+<body>
+
+<h1>Budgeteer</h1>
+
+<div id="slidecontainer">
+  <p>What is your budget? £<span id="budget_value"></span></p>
+  <input type="range" min="1" max="2000" value="50" class="slider" id="myRange">
+</div>
+
+<p>Any location preferences?</p>
+
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">Location</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#united kingdom">United Kingdom</a>
+    <a href="#eastern europe">Eastern Europe</a>
+    <a href="#western europe">Western Europe</a>
+  </div>
+</div>
+
+<div class="accomodation">
+	<p></p>
+	<p>What's your desired travel comfort?</p>
+	Low: <input type="checkbox" id="low" onclick="selectOnlyThis(this)"/>
+	Medium: <input type="checkbox" id="medium" onclick="selectOnlyThis(this)"/>
+	High: <input type="checkbox" id="high" onclick="selectOnlyThis(this)"/> 
+</div>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+/* This ensures only one tick box can be selected by going through
+each tick box, setting it to false and setting the selected id box to true*/
+function setAllCheckboxFalse() {
+    document.getElementById("low").checked = false;
+    document.getElementById("medium").checked = false;
+    document.getElementById("high").checked = false;
+	id.checked = true;
+
+}
+
+var slider = document.getElementById("myRange");
+var output = document.getElementById("budget_value");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+</body>
+</html>
