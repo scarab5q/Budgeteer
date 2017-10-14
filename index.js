@@ -8,6 +8,12 @@ require('dotenv').config()
 app.get('/api', function (req, res) {
   res.send('hello world')
 })
+app.get('/budget', function(comfort,days,location) {
+
+})
+// app.get('/comfort', function())
+// app.get('/days', function())
+// app.get('/location', function())
 
 app.use('/', express.static('public'))
 
