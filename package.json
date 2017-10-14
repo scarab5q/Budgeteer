@@ -4,6 +4,7 @@
   "description": "Hack Sheffield 2017",
   "main": "index.js",
   "scripts": {
+    "run": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
