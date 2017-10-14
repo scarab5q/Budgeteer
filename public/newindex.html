@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BUDGETEER</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+</head>
+
+<body>
+<div id="top">
+<img class="logo" src="images/logo.png">
+</div>
+<body>
+
+<div id="form-container">
+<div id="actual-content">
+<div id="slidecontainer">
+  <p>What is your budget? £<span id="budget_value"></span></p>
+  <input type="range" min="1" max="2000" value="50" class="slider" id="myRange">
+</div>
+
+<p>Any location preferences?</p>
+
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">Location</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#United Kingdom">Home</a>
+    <a href="#Eastern Europe">About</a>
+    <a href="#Western Europe">Contact</a>
+  </div>
+</div>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+var slider = document.getElementById("myRange");
+var output = document.getElementById("budget_value");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>	
+</div>
+</div>
+<div id="footer">
+	<p>The boys 2017 Copyright yes laaaads </p>
+</div>
+</body>
+</html>
