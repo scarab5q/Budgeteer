@@ -1,6 +1,5 @@
-const Endpoint = 'http://partners.api.skyscanner.net/apiservices'
+require('dotenv').config()
 
-
-export {
-  Endpoint,
+module.exports = {
+  Flights: require('./FlightsBrowsePrices')
 }

@@ -8,6 +8,7 @@
               "ClassDeclaration": false
             }
           }],
-      "comma-dangle": [0, "always-multiline"]
+      "comma-dangle": [0, "always-multiline"],
+      "no-trailing-spaces": 0
     }
 }
