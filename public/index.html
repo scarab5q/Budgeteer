@@ -85,7 +85,12 @@
 <script>	
 	
 function delay (URL) {
-    setTimeout( function() { window.location = URL }, 3800 );
+    var qs = {
+      budget: document.getElementById("myRange").value,
+      startDate: document.getElementById("timepicker1").value,
+      endDate: document.getElementById("timepicker2").value
+    }
+    setTimeout( function() { window.location = URL + encodeQs(qs) }, 3800 );
 }	
 	
 /* When the user clicks on the button, 
@@ -145,7 +150,8 @@ $("#button").click(function() {
   $('.transform').toggleClass('transform-active');
 });
 	
-</script>	
+</script>
+<script src="/app.js"></script>	
 </div>
 </div>
 <div id="footer">
