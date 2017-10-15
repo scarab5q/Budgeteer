@@ -61,9 +61,10 @@
 <div class="dropdown">
 <button onclick="myFunction()" class="dropbtn" id="dropbtn">Location</button>
   <div id="myDropdown" class="dropdown-content">
-    <a href="#united kingdom" onclick="countryClick('United Kingdom')">United Kingdom</a>
-    <a href="#eastern europe" onclick="countryClick('Eastern Europe')">Eastern Europe</a>
-    <a href="#western europe" onclick="countryClick('Western Europe')">Western Europe</a>
+    <a href="#uk" onclick="countryClick('United Kingdom')">United Kingdom</a>
+    <a href="#aus" onclick="countryClick('Australia')">Australia</a>
+    <a href="#usa" onclick="countryClick('United States')">United States</a>
+    <a href="#fr" onclick="countryClick('France')">France</a>
   </div>
 </div>
 
@@ -89,7 +90,8 @@ function delay (URL) {
     var qs = {
       budget: document.getElementById("myRange").value,
       startDate: start,
-      endDate: end
+      endDate: end,
+	    originCountry: document.getElementById("myDropdown").value
     }
     setTimeout( function() { window.location = URL + encodeQs(qs) }, 3800 );
 }	
