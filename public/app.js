@@ -45,21 +45,24 @@ async function mergeResults (qs) {
   for (let i = 0; i < euCountries.features.length; i++) {
     if (countryCosts[euCountries.features[i].properties.sovereignt]) {
       let cost = countryCosts[euCountries.features[i].properties.sovereignt][0]
+      let budget = searchParams.get("budget")
+      
+      euCountries.features[i].properties.SkyScanner = '£ ' + cost
       console.log(cost)
-      if (cost < 40) {
+      if ((cost / budget) < 0.4) {
         console.log(0)
         euCountries.features[i].properties.bdgColor = 4
         continue
       }
-      if (cost < 90) {
+      if ((cost / budget) < 0.7) {
         euCountries.features[i].properties.bdgColor = 3
         continue
       }
-      if (cost < 130) {
+      if ((cost / budget) < 0.90) {
         euCountries.features[i].properties.bdgColor = 2
         continue
       }
-      if (cost < 200) {
+      if ((cost / budget) < 1) {
         euCountries.features[i].properties.bdgColor = 1
         continue
       }
@@ -95,7 +98,7 @@ async function mergeResults (qs) {
     .on('mouseover', function (e) {
       var properties = e.layer.properties
       L.popup()
-        .setContent(properties.name || properties.type)
+        .setContent(properties.SkyScanner || properties.name || properties.type)
         .setLatLng(e.latlng)
         .openOn(map)
 
