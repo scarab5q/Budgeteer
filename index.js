@@ -26,10 +26,10 @@ app.get('/api/flights', async (req, res) => {
     res.send({error: 'Expected departing time'})
     return
   }
-  if (!req.query.returning) {
-    res.send({error: 'Expected returning date'})
-    return
-  }
+  // if (!req.query.returning) {
+  //   res.send({error: 'Expected returning date'})
+  //   return
+  // }
   if (!req.query.currency) {
     req.query.currency = 'gbp'
   }
@@ -55,13 +55,16 @@ app.get('/api/flights', async (req, res) => {
         return carriers[c + '']
       })
       fw.OutboundLeg.Origin = places[f.OutboundLeg.OriginId + '']
-      fw.OutboundLeg.Departure = places[f.OutboundLeg.DestinationId + '']
+      fw.OutboundLeg.Destination = places[f.OutboundLeg.DestinationId + '']
       
-      fw.InboundLeg.Carriers = f.InboundLeg.CarrierIds.map((c) => {
-        return carriers[c + '']
-      })
-      fw.InboundLeg.Origin = places[f.InboundLeg.OriginId + '']
-      fw.InboundLeg.Departure = places[f.InboundLeg.DestinationId + '']
+      if (fw.InboundLeg) {
+        fw.InboundLeg.Carriers = f.InboundLeg.CarrierIds.map((c) => {
+          return carriers[c + '']
+        })
+        fw.InboundLeg.Origin = places[f.InboundLeg.OriginId + '']
+        fw.InboundLeg.Destination = places[f.InboundLeg.DestinationId + '']
+      }
+      
       return fw
     })
 
@@ -75,4 +78,4 @@ app.get('/api/flights', async (req, res) => {
 app.use('/', express.static('public'))
 
 app.listen(PORT)
-console.log('Running at http://localhost:3000')
+console.log('Running at http://localhost:' + PORT)
