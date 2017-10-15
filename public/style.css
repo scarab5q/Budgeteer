@@ -21,7 +21,7 @@
 
 body {
 	font-family: 'Oxygen',sans-serif;
-	background-color:#C9FFC5;
+	background-color: #C9FFC5;
 	margin: 0;
 }
 
@@ -145,15 +145,18 @@ p {
 	padding-bottom: 20px;
 }
 
-.running: {
-	animation: runacross 4s;
+.transform {
+	padding-left: 0;
 }
 
-@keyframes runacross
-{
-    100% {
-        padding-left: 100%;
-    }
+.transform-active {
+	animation-duration: 4s;
+	animation-name: run;
+}
+
+@keyframes run {
+	0% {padding-left: 0%}
+	100% {padding-left: 100%;}
 }
 
 #budget_output {
