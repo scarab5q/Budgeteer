@@ -18,8 +18,9 @@
 <div id="form-container">
 <div id="actual-content">
 <div id="slidecontainer">
-  <p>What is your budget? £<span id="budget_value"></span></p>
-  <input type="range" min="1" max="2000" value="50" class="slider" id="myRange">
+  <p>What is your budget? £<input type="text" id="budget_output"> <button onclick="updateSlider()">Enter</button></p>
+  
+  <input type="range" min="1" max="2000" value="50" class="slider" id="myRange" onmouseup="updateBudgetText()">
 </div>
 
 <p>Any location preferences?</p>
@@ -66,9 +67,21 @@ function setAllCheckboxFalse(id) {
 
 }
 
+function updateSlider() {
+    var x = document.getElementById("budget_output").value;
+	document.getElementById("myRange").value = x;	
+}
+
 var slider = document.getElementById("myRange");
 var output = document.getElementById("budget_value");
-output.innerHTML = slider.value;
+var donny = slider.value;
+document.getElementById("budget_output").value = donny;
+
+
+function updateBudgetText() {
+	var donny = slider.value;
+	document.getElementById("budget_output").value = donny;
+}
 
 slider.oninput = function() {
   output.innerHTML = this.value;
