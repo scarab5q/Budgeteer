@@ -26,7 +26,7 @@ body {
 }
 
 #top{
-	padding-bottom: 3px;
+	padding-bottom: 25px;
 	padding-top: 5px;
 	background-color: #C9FFC5;
 	text-align: center;
@@ -54,7 +54,12 @@ p {
 
 #footer {
 	text-align: center;	
-	width: 100%;
+	margin-left: 30%;
+	margin-right: 30%;
+	background-color: #124d0e;
+	color: white;
+	border-style: solid;
+	border-color: black;
 }
 
 .accomodation {
