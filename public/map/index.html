@@ -3,19 +3,18 @@
 <head>
 	<title>BUDGETEER</title>
 	<meta charset="utf-8" />
-
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-	<link rel="stylesheet" href="style.css"/>
+	<link rel="stylesheet" href="/style.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
 	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 	<script src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
-	<script type="text/javascript" src="./eu-countries.js"></script>
+	<script type="text/javascript" src="/eu-countries.js"></script>
 </head>
 <body>
 <div id="container">
 <div id="top">
-<img class="logo" src="images/logo.png">
+<img class="logo" src="/images/logo.png">
 </div>
 
 <!-- START MAP CODE OH YEEEEEEEAH -->
@@ -23,7 +22,6 @@
 	<script>
 		var map = L.map('map');
 // 		var canvasRenderer = L.canvas();
-		require('./eu-countries')
 
 		var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
 
@@ -45,10 +43,10 @@
 				sliced: function(properties, zoom) {
 					var p = properties.mapcolor7 % 5;
 					return {
-						fillColor: p === 0 ? 'rgb(0, 0, 255)' :
-								p === 1 ? 'rgb(0, 64, 255)' :
-								p === 2 ? 'rgb(0, 128, 255)' :
-								p === 3 ? 'rgb(0, 192, 255)' : 'rgb(0, 255, 255)',
+						fillColor: p === 0 ? '#800026' :
+								p === 1 ? '#E31A1C' :
+								p === 2 ? '#FEB24C' :
+								p === 3 ? '#B2FE4C' : '#FFEDA0',
 						fillOpacity: 0.5,
 	// 					fillOpacity: 1,
 						stroke: true,
@@ -76,10 +74,10 @@
 
 			var p = properties.mapcolor7 % 5;
 			var style = {
-				fillColor: p === 0 ? 'rgb(0, 0, 255)' :
-						p === 1 ? 'rgb(0, 64, 255)' :
-						p === 2 ? 'rgb(0, 128, 255)' :
-						p === 3 ? 'rgb(0, 192, 255)' : 'rgb(0, 255, 255)',
+				fillColor: p === 0 ? '#800026' :
+						p === 1 ? '#E31A1C' :
+						p === 2 ? '#FEB24C' :
+						p === 3 ? '#B2FE4C' : '#FFEDA0',
 				fillOpacity: 0.5,
 				fillOpacity: 1,
 				stroke: true,
@@ -100,7 +98,11 @@
 
 	</script>
 	
-	<p>The boys 2017 Copyright yes laaaads </p>
+	
 </div>
+<div id="footer">
+<p>The boys 2017 Copyright yes laaaads </p>
+</div>
+<script src="/app.js"></script>
 </body>
 </html>
