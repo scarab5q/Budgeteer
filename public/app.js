@@ -1,11 +1,11 @@
-function encodeQs(params) {
+function encodeQs (params) {
   var query = Object.keys(params)
     .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
     .join('&')
   return '?' + query
 }
 
-async function queryNewFlights() {
+async function queryNewFlights () {
   let data = {
     origin: 'uk',
     destination: 'anywhere',
@@ -21,11 +21,11 @@ async function queryNewFlights() {
   }  
 }
 
-function findCountryCosts(flights) {
+function findCountryCosts (flights) {
   let country = {}
   
   flights.forEach((f) => {
-    console.log(f)
+    // console.log(f)
     if (country[f.OutboundLeg.Destination.CountryName] !== undefined) {
       let cData = country[f.OutboundLeg.Destination.CountryName]
       cData.push(f.MinPrice)
@@ -37,30 +37,96 @@ function findCountryCosts(flights) {
   return country
 }
 
-async function mergeResults() {
+async function mergeResults () {
   let flights = await queryNewFlights()
   
   let countryCosts = findCountryCosts(flights)
-  
-  for(let i = 0; i <euCountries.features.length; i++ ) {
-    if(countryCosts[euCountries.features[i].properties.sovereignt]) {
-      let cost = countryCosts[euCountries.features[i].properties.sovereignt]
-      
-      if(cost < 40) {
-        euCountries.features[i].properties.mapcolor7 = 0
+  console.log(euCountries.features.length)
+  for (let i = 0; i < euCountries.features.length; i++) {
+    if (countryCosts[euCountries.features[i].properties.sovereignt]) {
+      let cost = countryCosts[euCountries.features[i].properties.sovereignt][0]
+      console.log(cost)
+      if (cost < 40) {
+        console.log(0)
+        euCountries.features[i].properties.bdgColor = 4
+        continue
       }
-      if(cost < 100 && cost > 40) {
-        euCountries.features[i].properties.mapcolor7 = 1
+      if (cost < 90) {
+        euCountries.features[i].properties.bdgColor = 3
+        continue
       }
-      if(cost < 150 && cost > 100) {
-        euCountries.features[i].properties.mapcolor7 = 2
+      if (cost < 130) {
+        euCountries.features[i].properties.bdgColor = 2
+        continue
       }
-      if(cost < 200 && cost > 150) {
-        euCountries.features[i].properties.mapcolor7 = 3
+      if (cost < 200) {
+        euCountries.features[i].properties.bdgColor = 1
+        continue
       }
-      if(cost < 300 && cost > 200) {
-        euCountries.features[i].properties.mapcolor7 = 4
-      }
+        euCountries.features[i].properties.bdgColor = 0
     }
   }
+  
+  var vectorGrid = L.vectorGrid.slicer(euCountries, {
+    rendererFactory: L.svg.tile,
+    vectorTileLayerStyles: {
+      sliced: function (properties, zoom) {
+        var p = properties.bdgColor
+        return {
+          fillColor: p === 0 ? '#000000'
+            : p === 1 ? '#f60c00'
+              : p === 2 ? '#f66300'
+                : p === 3 ? '#f6ec00' : p === 4 ? '#6cf600' : '',
+          fillOpacity: 0.5,
+          // 					fillOpacity: 1,
+          stroke: true,
+          fill: true,
+          color: 'black',
+          // 							opacity: 0.2,
+          weight: 0,
+        }
+      }
+    },
+    interactive: true,
+    getFeatureId: function (f) {
+      return f.properties.wb_a3
+    }
+  })
+    .on('mouseover', function (e) {
+      var properties = e.layer.properties
+      L.popup()
+        .setContent(properties.name || properties.type)
+        .setLatLng(e.latlng)
+        .openOn(map)
+
+      clearHighlight()
+      highlight = properties.wb_a3
+      var p = properties.bdgColor % 5
+      var style = {
+        fillColor: p === 0 ? '#ED7273'
+          : p === 1 ? '#E31A1C'
+            : p === 2 ? '#FEB24C'
+              : p === 3 ? '#B2FE4C' : '#FFEDA0',
+        fillOpacity: 0.5,
+        fillOpacity: 1,
+        stroke: true,
+        fill: true,
+        color: 'red',
+        opacity: 1,
+        weight: 2,
+      }
+
+      vectorGrid.setFeatureStyle(properties.wb_a3, style)
+    })
+    .addTo(map)
+  
+  var highlight
+  var clearHighlight = function () {
+    if (highlight) {
+      vectorGrid.resetFeatureStyle(highlight)
+    }
+    highlight = null
+  }
+
+  map.on('click', clearHighlight)
 }
