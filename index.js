@@ -30,6 +30,12 @@ app.get('/api/flights', async (req, res) => {
     res.send({error: 'Expected departing time'})
     return
   }
+  if (req.query.departing === 'Invalid date') {
+    req.query.departing = 'anytime'
+  }
+  if (req.query.returning === 'Invalid date') {
+    req.query.returning = ''
+  }
   // if (!req.query.returning) {
   //   res.send({error: 'Expected returning date'})
   //   return

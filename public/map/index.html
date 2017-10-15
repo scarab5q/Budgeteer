@@ -14,11 +14,11 @@
 <body>
 <div id="container">
 <div id="top">
-<a href="#" onclick="mergeResults()"><img class="logo" src="/images/logo.png"></a>
+<a href="/"><img class="logo" src="/images/logo.png"></a>
 </div>
 
 <!-- START MAP CODE OH YEEEEEEEAH -->
-	<div id="map" style="width: 100%; height: 600px"></div>
+	<div id="map" style="width: 100%; height: 90vh"></div>
 	<script src="/app.js"></script>
 	<script>
 		var map = L.map('map');
@@ -37,6 +37,7 @@
 
 		var searchParams = new URLSearchParams(window.location.search)
 		let qs = {
+			originCountry: searchParams.get("originCountry"),
 			budget: searchParams.get("budget"),
 			startDate: searchParams.get("startDate"),
 			endDate: searchParams.get("endDate")

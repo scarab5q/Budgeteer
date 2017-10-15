@@ -61,10 +61,10 @@
 <div class="dropdown">
 <button onclick="myFunction()" class="dropbtn" id="dropbtn">Location</button>
   <div id="myDropdown" class="dropdown-content">
-    <a href="#uk" onclick="countryClick('United Kingdom')">United Kingdom</a>
-    <a href="#aus" onclick="countryClick('Australia')">Australia</a>
-    <a href="#usa" onclick="countryClick('United States')">United States</a>
-    <a href="#fr" onclick="countryClick('France')">France</a>
+    <a href="#uk" onclick="countryClick('United Kingdom', 'uk')">United Kingdom</a>
+    <a href="#aus" onclick="countryClick('Australia', 'au')">Australia</a>
+    <a href="#usa" onclick="countryClick('United States', 'us')">United States</a>
+    <a href="#fr" onclick="countryClick('France', 'fr')">France</a>
   </div>
 </div>
 
@@ -82,7 +82,8 @@
 	<a href="javascript:delay('map/index.html')" ><img id="button" class="transform" src="images/running-man.png" height="50px"></a>
 </div>
 
-<script>	
+<script>
+var selectedCountry = 'uk'	
 	
 function delay (URL) {
   let start = moment(document.getElementById("timepicker1").value).format('YYYY-MM-DD');
@@ -91,7 +92,7 @@ function delay (URL) {
       budget: document.getElementById("myRange").value,
       startDate: start,
       endDate: end,
-	    originCountry: document.getElementById("myDropdown").value
+	    originCountry: selectedCountry
     }
     setTimeout( function() { window.location = URL + encodeQs(qs) }, 3800 );
 }	
@@ -102,8 +103,9 @@ function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 	
-function countryClick(country) {
+function countryClick(country, selected) {
 	document.getElementById("dropbtn").innerText = country
+  selectedCountry = selected
 }
 
 /* This ensures only one tick box can be selected by going through
