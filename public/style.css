@@ -9,12 +9,14 @@
 	padding-top: 5px;
 	border: black;
 	border-style: solid;
+	height: 100%;
 	
 }
 
 #actual-content {
 	margin-left: 70px;
 	margin-right: 70px;
+	height: 100%
 }
 
 body {
@@ -51,6 +53,7 @@ p {
 
 #footer {
 	text-align: center;	
+	width: 100%;
 }
 
 .accomodation {
@@ -137,6 +140,11 @@ p {
 	width: 100%;
 }
 
+#runningman {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 .running: {
 	animation: runacross 4s;
 }
@@ -146,4 +154,10 @@ p {
     100% {
         padding-left: 100%;
     }
+}
+
+#budget_output {
+	 background-color: transparent;
+	border: none;
+	font-size: 16pt;
 }
