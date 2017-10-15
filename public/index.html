@@ -11,8 +11,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
 
-
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   -->
+<script src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -85,10 +84,12 @@
 <script>	
 	
 function delay (URL) {
+  let start = moment(document.getElementById("timepicker1").value).format('YYYY-MM-DD');
+  let end = moment(document.getElementById("timepicker2").value).format('YYYY-MM-DD');
     var qs = {
       budget: document.getElementById("myRange").value,
-      startDate: document.getElementById("timepicker1").value,
-      endDate: document.getElementById("timepicker2").value
+      startDate: start,
+      endDate: end
     }
     setTimeout( function() { window.location = URL + encodeQs(qs) }, 3800 );
 }	

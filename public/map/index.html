@@ -19,6 +19,7 @@
 
 <!-- START MAP CODE OH YEEEEEEEAH -->
 	<div id="map" style="width: 100%; height: 600px"></div>
+	<script src="/app.js"></script>
 	<script>
 		var map = L.map('map');
 // 		var canvasRenderer = L.canvas();
@@ -34,11 +35,21 @@
 		map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 4);
 
 
+		var searchParams = new URLSearchParams(window.location.search)
+		let qs = {
+			budget: searchParams.get("budget"),
+			startDate: searchParams.get("startDate"),
+			endDate: searchParams.get("endDate")
+		}
+		
+		mergeResults(qs)
+		
+		
 	</script>
 </div>
 <div id="footer">
 <p>The boys 2017 Copyright yes laaaads </p>
 </div>
-<script src="/app.js"></script>
+
 </body>
 </html>

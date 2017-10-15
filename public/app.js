@@ -5,12 +5,12 @@ function encodeQs (params) {
   return '?' + query
 }
 
-async function queryNewFlights () {
+async function queryNewFlights (qs) {
   let data = {
     origin: 'uk',
     destination: 'anywhere',
-    departing: 'anytime',
-    returning: 'anytime'
+    departing: qs.startDate === undefined ? 'anytime' : qs.startDate,
+    returning: qs.endDate === undefined ? 'anytime' : qs.endDate
   }
   try {
     let response = await fetch('/api/flights' + encodeQs(data))
@@ -37,8 +37,8 @@ function findCountryCosts (flights) {
   return country
 }
 
-async function mergeResults () {
-  let flights = await queryNewFlights()
+async function mergeResults (qs) {
+  let flights = await queryNewFlights(qs)
   
   let countryCosts = findCountryCosts(flights)
   console.log(euCountries.features.length)
