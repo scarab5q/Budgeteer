@@ -35,8 +35,9 @@ p {
 	font-family: 'Oxygen', sans-serif;
 }
 
-.submission {
+.submission img {
 	padding-top: 15px;
+	height: 30px;
 }
 
 #map {
@@ -54,6 +55,7 @@ p {
 
 .accomodation {
 	font-family: 'Oxygen', sans-serif;
+	padding-bottom: 15px;
 }
 
 .slider {
@@ -135,7 +137,13 @@ p {
 	width: 100%;
 }
 
-img {
-	height: 60px;
-	padding-top: 15px;
+.running: {
+	animation: runacross 4s;
+}
+
+@keyframes runacross
+{
+    100% {
+        padding-left: 100%;
+    }
 }

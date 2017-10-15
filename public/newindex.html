@@ -42,10 +42,10 @@
 </div>
 
 <span id="edit-img" class="img-span pull-right" >
-	<a href="index.html"><img src="images/running-man.png" height="50px"></a>
+	<img src="images/running-man.png" height="50px" id="img" class="running" onclick="submit()">
 </span>
 
-<script>
+<script>	
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function myFunction() {
@@ -88,6 +88,11 @@ window.onclick = function(event) {
     }
   }
 }
+
+function submit() {
+	document.getElementById('img').className ='running';
+}
+	
 </script>	
 </div>
 </div>
