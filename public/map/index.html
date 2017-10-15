@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-	<link rel="stylesheet" href="/style.css"/>
+	<link rel="stylesheet" href="../style.css">
 	<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
 	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 	<script src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
@@ -14,7 +14,7 @@
 <body>
 <div id="container">
 <div id="top">
-<img class="logo" src="/images/logo.png">
+<a href="/index.html"><img class="logo" src="/images/logo.png"></a>
 </div>
 
 <!-- START MAP CODE OH YEEEEEEEAH -->
@@ -71,13 +71,19 @@
 
 			clearHighlight();
 			highlight = properties.wb_a3;
-
 			var p = properties.mapcolor7 % 5;
 			var style = {
-				fillColor: p === 0 ? '#800026' :
+				fillColor: p === 0 ? '#ED7273' :
 						p === 1 ? '#E31A1C' :
 						p === 2 ? '#FEB24C' :
 						p === 3 ? '#B2FE4C' : '#FFEDA0',
+				
+//				fillColor: p === 0 ? 'rgb(0,p*64,255)' :
+//					p === 1 ? 'rgb(0,p*128,255)':
+//					p === 2 ? 'rgb(0,p*256,255)' :
+//					p === 3 ? 'rgb(0,p*256,255)' : '#FFEDA0',
+					
+
 				fillOpacity: 0.5,
 				fillOpacity: 1,
 				stroke: true,
@@ -97,8 +103,6 @@
 
 
 	</script>
-	
-	
 </div>
 <div id="footer">
 <p>The boys 2017 Copyright yes laaaads </p>

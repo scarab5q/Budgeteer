@@ -1,105 +1,143 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>BUDGETEER</title>
-	<meta charset="utf-8" />
+<title>BUDGETEER</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css"/>
+<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script src="jquery-3.2.1.js"></script>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-	<link rel="stylesheet" href="style.css"/>
-	<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
-	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-	<script src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
-	<script type="text/javascript" src="./eu-countries.js"></script>
+	
 </head>
+
 <body>
-<div id="container">
 <div id="top">
-<img class="logo" src="images/logo.png">
+<a href="../public/index.html"><img class="logo" src="images/logo.png"></a>
+</div>
+<body>
+
+<div id="form-container">
+<div id="actual-content">
+<div id="slidecontainer">
+  <p>What is your budget? £<input type="text" id="budget_output"></p>
+  <input type="range" min="1" max="2000" value="50" class="slider" id="myRange" oninput="updateBudgetText()">
 </div>
 
-<!-- START MAP CODE OH YEEEEEEEAH -->
-	<div id="map" style="width: 100%; height: 600px"></div>
-	<script>
-		var map = L.map('map');
-// 		var canvasRenderer = L.canvas();
-		require('./eu-countries')
+<p>Starting Location:</p>
 
-		var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn" id="dropbtn">Location</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#united kingdom" onclick="countryClick('United Kingdom')">United Kingdom</a>
+    <a href="#eastern europe" onclick="countryClick('Eastern Europe')">Eastern Europe</a>
+    <a href="#western europe" onclick="countryClick('Western Europe')">Western Europe</a>
+  </div>
+</div>
 
-		var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-			attribution: cartodbAttribution,
-			opacity: 1
-		}).addTo(map);
-		
-		var highlight;
-		var clearHighlight = function() {
-			if (highlight) {
-				vectorGrid.resetFeatureStyle(highlight);
-			}
-			highlight = null;
-		};
-		var vectorGrid = L.vectorGrid.slicer( euCountries, {
-			rendererFactory: L.svg.tile,
-			vectorTileLayerStyles: {
-				sliced: function(properties, zoom) {
-					var p = properties.mapcolor7 % 5;
-					return {
-						fillColor: p === 0 ? 'rgb(0, 0, 255)' :
-								p === 1 ? 'rgb(0, 64, 255)' :
-								p === 2 ? 'rgb(0, 128, 255)' :
-								p === 3 ? 'rgb(0, 192, 255)' : 'rgb(0, 255, 255)',
-						fillOpacity: 0.5,
-	// 					fillOpacity: 1,
-						stroke: true,
-						fill: true,
-						color: 'black',
-// 							opacity: 0.2,
-						weight: 0,
-					}
-				}
-			},
-			interactive: true,
-			getFeatureId: function(f) {
-				return f.properties.wb_a3;
-			}
-		})
-		.on('mouseover', function(e) {
-			var properties = e.layer.properties;
-			L.popup()
-				.setContent(properties.name || properties.type)
-				.setLatLng(e.latlng)
-				.openOn(map);
+<!--Start Calendar-->
+<p>Please enter the date of departure:</p>
+<div class="input-group bootstrap-timepicker timepicker">
+	<input id="timepicker1" type="text" class="form-control input-small">
+	<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+</div>
 
-			clearHighlight();
-			highlight = properties.wb_a3;
-
-			var p = properties.mapcolor7 % 5;
-			var style = {
-				fillColor: p === 0 ? 'rgb(0, 0, 255)' :
-						p === 1 ? 'rgb(0, 64, 255)' :
-						p === 2 ? 'rgb(0, 128, 255)' :
-						p === 3 ? 'rgb(0, 192, 255)' : 'rgb(0, 255, 255)',
-				fillOpacity: 0.5,
-				fillOpacity: 1,
-				stroke: true,
-				fill: true,
-				color: 'red',
-				opacity: 1,
-				weight: 2,
-			};
-
-			vectorGrid.setFeatureStyle(properties.wb_a3, style);
-		})
-		.addTo(map);
-
-		map.on('click', clearHighlight);
-
-		map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 4);
+<script type="text/javascript">
+$(function () {
+	$('#timepicker1').datetimepicker();
+});
+</script>
 
 
-	</script>
+
+<p><p></p></p>
+
+<span id="edit-img" class="img-span pull-right" >
+	<a href="javascript:delay('map/index.html')" ><img id="button" src="images/running-man.png" height="50px" class="transform"></a>
+</span>
+
+<div class="accomodation">
+	<p></p>
+	<p>What's your desired travel comfort?</p>
+	Low: <input type="checkbox" id="low" onclick="setAllCheckboxFalse(this)"/>
+	Medium: <input type="checkbox" id="medium" onclick="setAllCheckboxFalse(this)"/>
+	High: <input type="checkbox" id="high" onclick="setAllCheckboxFalse(this)"/> 
+</div>
+
+<script>	
 	
+function delay (URL) {
+    setTimeout( function() { window.location = URL }, 3800 );
+}	
+	
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+	
+function countryClick(country) {
+	document.getElementById("dropbtn").innerText = country
+}
+
+/* This ensures only one tick box can be selected by going through
+each tick box, setting it to false and setting the selected id box to true*/
+function setAllCheckboxFalse(id) {
+    document.getElementById("low").checked = false;
+    document.getElementById("medium").checked = false;
+    document.getElementById("high").checked = false;
+	id.checked = true;
+
+}
+
+function updateSlider() {
+    var x = document.getElementById("budget_output").value;
+	document.getElementById("myRange").value = x;	
+}
+
+var slider = document.getElementById("myRange");
+var output = document.getElementById("budget_value");
+var donny = slider.value;
+document.getElementById("budget_output").value = donny;
+
+
+function updateBudgetText() {
+	var donny = slider.value;
+	document.getElementById("budget_output").value = donny;
+}
+
+
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+$("#button").click(function() {
+  $('.transform').toggleClass('transform-active');
+});
+	
+</script>	
+</div>
+</div>
+<div id="footer">
 	<p>The boys 2017 Copyright yes laaaads </p>
 </div>
 </body>
